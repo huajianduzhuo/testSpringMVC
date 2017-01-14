@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+body{
+	margin: 0 auto;
+	background-color: #EDE221;
+}
+#global{
+	width: 500px;
+	height:300px;
+	margin: 0 auto;
+	position: relative;
+	top: 200px;
+}
+fieldset{
+	border: 1px solid #4171ED;
+	font-size: 18px;
+}
+legend{
+	color:#F00;
+	font-size: 25px;
+	font-weight: bold;
+}
+#buttons{
+	text-align: center;
+}
+label{
+	width: 200px;
+	text-align:right;
+	display: block;
+	float: left;
+	padding-right: 20px;
+}
+h4{
+	color:#000;
+	font-size: 21px;
+	font-weight: bold;
+}
