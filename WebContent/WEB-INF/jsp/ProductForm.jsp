@@ -33,7 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</ul>
     		</div>
     	</c:if>
-    	<form action="product_save.action" method="post">
+    	<%--DispatcherServlet接收所有请求，去掉.action --%>
+    	<form action="product_save" method="post">
     		<fieldset>
     			<legend>Add a product</legend>
     			<p>
