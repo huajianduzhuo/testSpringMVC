@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +26,7 @@ import form.ProductForm;
 public class ProductController {
 	private static final Log logger = LogFactory.getLog(ProductController.class);
 	
+	@Autowired
 	private ProductService productService;
 	
 	/**
@@ -65,8 +65,7 @@ public class ProductController {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
-			ApplicationContext cxt = new FileSystemXmlApplicationContext("classpath:applicationContext.xml");
-			productService = (ProductService) cxt.getBean("productService");
+			//productService由spring注入（只有在控制器类使用@Controller注解时，service才能依赖注入）
 			productService.saveProduct(product);
 			//Model用于增加显示在视图中的属性，保存成功，将product放入model，在ProductDetails页面可以像放在request中一样使用
 			model.addAttribute("product", product);
