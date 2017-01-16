@@ -18,13 +18,18 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public void saveProduct(Product product) {
-		this.getCurrentSession().save(product);
+	public Integer saveProduct(Product product) {
+		return (Integer) this.getCurrentSession().save(product);
 	}
 
 	@Override
 	public void updateProduct(Product product) {
 		this.getCurrentSession().update(product);
+	}
+
+	@Override
+	public Product getProductById(Integer id) {
+		return (Product) this.getCurrentSession().get(Product.class, id);
 	}
 
 }

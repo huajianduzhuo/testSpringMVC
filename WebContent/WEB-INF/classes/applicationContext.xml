@@ -39,9 +39,6 @@
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
-				<prop key="hibernate.current_session_context_class">
-					org.springframework.orm.hibernate4.SpringSessionContext
-				</prop>
 			</props>
 		</property>
 		<!-- 自动扫描注解方式配置的hibernate类文件 -->
@@ -61,11 +58,12 @@
 	<!-- 拦截器方式配置事物 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="get*" propagation="SUPPORTS" />
-			<tx:method name="find*" propagation="SUPPORTS" />
-			<tx:method name="load*" propagation="SUPPORTS" />
-			<tx:method name="search*" propagation="SUPPORTS" />
-			<tx:method name="datagrid*" propagation="SUPPORTS" />
+			<!-- 因为在getProductById方法运行时出现No Session found for current thread异常，所以把support改为required -->
+			<tx:method name="get*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="load*" propagation="REQUIRED" />
+			<tx:method name="search*" propagation="REQUIRED" />
+			<tx:method name="datagrid*" propagation="REQUIRED" />
 
 			<tx:method name="*" propagation="REQUIRED" />
 		</tx:attributes>

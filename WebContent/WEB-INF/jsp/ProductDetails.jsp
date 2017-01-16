@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div id="global">
-    	<h4>The product has been saved.</h4>
+    	<h4>${message }.</h4>
    		<fieldset>
    			<legend>Details</legend>
    			<p>

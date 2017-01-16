@@ -14,14 +14,20 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDao productDao;
 	
 	@Override
-	public void saveProduct(Product product) {
-		productDao.saveProduct(product);
+	public Integer saveProduct(Product product) {
+		return productDao.saveProduct(product);
 	}
 
 
 	@Override
 	public void updateProduct(Product product) {
 		productDao.updateProduct(product);
+	}
+
+
+	@Override
+	public Product getProductById(Integer id) {
+		return productDao.getProductById(id);
 	}
 
 }

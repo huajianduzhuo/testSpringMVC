@@ -22,7 +22,8 @@
 	
 	<!-- 配置视图解析器前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="WEB-INF/jsp/"></property>
+		<!-- /WEB-INF前面一定要有/，否则路径会出错，血的教训 -->
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	

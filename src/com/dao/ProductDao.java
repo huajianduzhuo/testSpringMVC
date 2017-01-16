@@ -3,7 +3,8 @@ package com.dao;
 import domain.Product;
 
 public interface ProductDao {
-	public void saveProduct(Product product);
+	public Integer saveProduct(Product product);
 	public void updateProduct(Product product);
+	public Product getProductById(Integer id);
 
 }
