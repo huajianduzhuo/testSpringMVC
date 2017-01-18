@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.service.ProductService;
 
 import domain.Product;
-import form.ProductForm;
 
 /**
  * 使用controller注解，一个控制器可以包含多个请求处理方法
@@ -47,33 +46,20 @@ public class ProductController {
 	 * @return
 	 */
 	@RequestMapping(value = "/product_save", method = RequestMethod.POST)
-	public String saveProduct(ProductForm form, RedirectAttributes redirectAttributes) {
+	public String saveProduct(Product product, RedirectAttributes redirectAttributes) {
 		logger.info("saveProduct called");
-		//测试重定向，将校验去掉
-		/**ProductValidator productValidator = new ProductValidator();
-		List<String> errors = productValidator.validate(form);
-		if(errors.isEmpty()){*/
-			Product product = new Product();
-			product.setName(form.getName());
-			product.setDescription(form.getDescription());
-			try {
-				product.setPrice(Float.parseFloat(form.getPrice()));
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-			//productService由spring注入（只有在控制器类使用@Controller注解时，service才能依赖注入）
-			Integer id = productService.saveProduct(product);
-			//使用重定向，经过客户端，model中的一切会在重定向时丢失，所以不使用model
-			/**model.addAttribute("product", product);*/
-			//为了传值给客户端，spring3.1及以上版本通过flash属性提供传值方法，必须在参数中添加redirectAttributes
-			redirectAttributes.addFlashAttribute("message", "The product was successfully added");
-			//重定向至/product_view
-			return "redirect:/product_view/" + id;
-		/**}else{
-			model.addAttribute("errors", errors);
-			model.addAttribute("form", form);
-			return "ProductForm";
+		//product由spring数据绑定，数据验证失败时，会重新生成表单
+		/**Product product = new Product();
+		product.setName(form.getName());
+		product.setDescription(form.getDescription());
+		try {
+			product.setPrice(Float.parseFloat(form.getPrice()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 		}*/
+		Integer id = productService.saveProduct(product);
+		redirectAttributes.addFlashAttribute("message", "The product was successfully added");
+		return "redirect:/product_view/" + id;
 	}
 	
 	/**
