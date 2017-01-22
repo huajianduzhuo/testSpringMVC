@@ -22,9 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div id="global">
-    	<h4>${message }.</h4>
+    	<h4>${message }</h4>
    		<fieldset>
    			<legend>Details</legend>
+   			<p>
+   				<label for="category">Category: </label>${product.category.name }<br>
+   			</p>
    			<p>
    				<label for="name">Product Name: </label>${product.name }<br>
    			</p>
@@ -33,6 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			</p>
    			<p>
    				<label for="price">Price: </label>$${product.price }<br>
+   			</p>
+   			<p>
+   				<label for="productionDate">ProductionDate: </label>${product.productionDate }<br>
    			</p>
    		</fieldset>
     </div>
