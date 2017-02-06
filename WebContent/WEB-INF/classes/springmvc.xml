@@ -14,9 +14,11 @@
 	<context:annotation-config />
 	<!-- 配置自动扫描的controller基本包 -->
 	<context:component-scan base-package="controller"></context:component-scan>
+	<!-- 配置自动扫描的formatter基本包 -->
+	<context:component-scan base-package="formatter"></context:component-scan>
 	
 	<!-- 使用转换器，必须配置conversionService -->
-	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+	<!-- <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
 				<bean class="converter.StringToDateConverter">
@@ -24,12 +26,23 @@
 				</bean>
 			</list>
 		</property>
-	</bean>
+	</bean> -->
 	
 	<!-- web.xml中配置所有请求都映射到DispatcherServlet，下面配置静态资源单独处理，不通过DispatcherServlet -->
 	<!-- 若不使用annotation-driven，resources会组织任意控制器被调用；若不使用resources，则不需要annotation-driven元素 -->
 	<mvc:annotation-driven conversion-service="conversionService"/>
 	<mvc:resources location="/css/" mapping="/css/**"/>
+	
+	<!-- 使用格式化 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<bean class="formatter.DateFormatter">
+					<constructor-arg type="java.lang.String" value="MM-dd-yyyy" />
+				</bean>
+			</set>
+		</property>
+	</bean>
 	
 	<!-- 配置视图解析器前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

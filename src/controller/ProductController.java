@@ -55,17 +55,14 @@ public class ProductController {
 	 * 为了保证保存之后刷新页面时，save方法不被重复调用，数据库存值重复，返回路径使用重定向
 	 * @param productForm
 	 * @param model
-	 * @param bindingResult 绑定错误信息
 	 * @return
 	 */
 	@RequestMapping(value = "/product_save", method = RequestMethod.POST)
-	public String saveProduct(Product product, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+	public String saveProduct(Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		logger.info("saveProduct called");
 		if(bindingResult.hasErrors()){
-			FieldError fe = bindingResult.getFieldError();
-			logger.info("Code:"+fe.getCode()+", Field:"+fe.getField());
-			List<Category> categorys = categoryService.getAllCategorys();
-			product.setCategorys(categorys);
+			FieldError fieldError = bindingResult.getFieldError();
+			logger.info("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
 			return "ProductForm";
 		}
 		Integer id = productService.saveProduct(product);
