@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div id="global">
     	<%--DispatcherServlet接收所有请求，去掉.action --%>
-    	<form:form commandName="product" action="product_save" method="post">
+    	<form:form commandName="product" action="product_save.do" method="post">
     		<fieldset>
     			<legend>Add a product</legend>
     			<p>

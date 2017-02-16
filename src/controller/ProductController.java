@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,11 +59,7 @@ public class ProductController {
 	@RequestMapping(value = "/product_save", method = RequestMethod.POST)
 	public String saveProduct(Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		logger.info("saveProduct called");
-		if(bindingResult.hasErrors()){
-			FieldError fieldError = bindingResult.getFieldError();
-			logger.info("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
-			return "ProductForm";
-		}
+	
 		Integer id = productService.saveProduct(product);
 		redirectAttributes.addFlashAttribute("message", "The product was successfully added");
 		return "redirect:/product_view/" + id;
