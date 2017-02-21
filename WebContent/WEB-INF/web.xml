@@ -38,6 +38,6 @@
 	<!-- url-pattern中的*.action改为/，所有请求（包括js、css）都被映射到springmvc的DispatcherServlet，因此要在springmvc.xml中进行配置 -->
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 </web-app>

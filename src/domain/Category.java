@@ -21,7 +21,7 @@ public class Category implements Serializable {
 	
 	private Integer id;
 	private String name;
-	private List<Product> products;
+	//private List<Product> products;	//此字段导致springmvc将查询得到的产品集合转化为	JSON字符串时出错
 	
 	@GenericGenerator(name="generator", strategy="increment")
 	@Id
@@ -41,13 +41,20 @@ public class Category implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="category")
+	/**
+	 * mappedBy 只有OneToOne，OneToMany，ManyToMany上才有mappedBy属性
+	 * mappedBy 一定存在在 被拥有方，指向 拥有方
+	 * mappedBy 的含义为，拥有方能够自动维护跟被拥有方的关系
+	 * mappedBy 的值，为ManyToOne中的对象名
+	 * @return
+	 */
+	/*@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="category")
 	public List<Product> getProducts() {
 		return products;
 	}
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
+	}*/
 	
 
 }

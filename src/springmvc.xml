@@ -31,7 +31,8 @@
 	<!-- web.xml中配置所有请求都映射到DispatcherServlet，下面配置静态资源单独处理，不通过DispatcherServlet -->
 	<!-- 若不使用annotation-driven，resources会组织任意控制器被调用；若不使用resources，则不需要annotation-driven元素 -->
 	<mvc:annotation-driven /> <!-- conversion-service="conversionService" -->
-	<mvc:resources location="/css/" mapping="/css/**"/>
+	<!-- <mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/> -->
 	
 	<!-- 使用格式化 -->
 	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
@@ -47,8 +48,34 @@
 	<!-- 配置视图解析器前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- /WEB-INF前面一定要有/，否则路径会出错，血的教训 -->
-		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="prefix" value="/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+	<!-- 从请求和响应读取/编写字符串 -->
+	<bean id="stringHttpMessage" class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 用于将对象转化为JSON -->
+	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="stringHttpMessage"/>
+				<ref bean="jsonConverter"/>
+			</list>
+		</property>
+	</bean>
 </beans>

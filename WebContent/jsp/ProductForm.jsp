@@ -51,6 +51,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				<label for="productionDate">ProductionDate: </label>
     				<form:input id="productionDate" path="productionDate" tabindex="4"/>
     			</p>
+    			<p>
+    				<label for="color">Color: </label>
+    				<input type="text" name="color" />
+    			</p>
     			<p id="buttons">
     				<input id="reset" type="reset" tabindex="5" value="reset" />
     				<input id="submit" type="submit" tabindex="6" value="Add Product" />

@@ -34,3 +34,83 @@ h4{
 	font-size: 21px;
 	font-weight: bold;
 }
+
+/* ProductList.jsp文件css样式 */
+#main{
+	width:980px;
+	height:600px;
+	margin:50px auto 0px auto;
+	border:1px solid #aaa;
+	background-color: #fff;
+	padding: 20px;
+}
+#left{
+	height:100%;
+	width:180px;
+	float: left;
+}
+#left ul{
+	border-top: 1px solid #aa1100;
+	border-right: 1px solid #aa1100;
+	padding: 0px;
+	margin:0px;
+	margin-top: 10px;
+}
+#left ul li{
+	list-style: none;
+	line-height: 40px;
+	border-bottom: 1px solid #aa1100;
+	cursor: pointer;
+	padding-left: 10px;
+}
+#top{
+	text-align: center;
+}
+#top #productName{
+	width: 400px;
+	height: 39px;
+	border: 2px solid #848484;
+	margin-right: 15px;
+	padding-left: 12px;
+	font-size: 18px;
+}
+#top #productName:FOCUS{
+	border-color: #1e90ff;
+}
+#top #queryBtn{
+	width: 70px;
+	height: 40px;
+	border-radius : 5px;
+	border: 0px;
+	background-color: #ffaeb9;
+	cursor: pointer;
+}
+#proList{
+	width: 650px;
+	float: left;
+	margin-top: 50px;
+	margin-left: 80px;
+}
+#proList #proListTable{
+	width: 100%;
+}
+#proList #proListTable th{
+	line-height: 30px;
+	text-align: center;
+	padding-bottom: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #cd5555;
+}
+#proList #proListTable td{
+	line-height: 30px;
+	text-align: center;
+	font-size: 16px;
+}
+#proList #proListTable td a{
+	text-decoration: none;
+	color: #6e6e6e;
+}
+#proList #proListTable td a:HOVER {
+	color: #436eee;
+}

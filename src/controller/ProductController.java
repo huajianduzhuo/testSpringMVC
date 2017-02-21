@@ -7,10 +7,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.service.CategoryService;
@@ -57,12 +57,12 @@ public class ProductController {
 	 * @return
 	 */
 	@RequestMapping(value = "/product_save", method = RequestMethod.POST)
-	public String saveProduct(Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public String saveProduct(Product product, String color, RedirectAttributes redirectAttributes) {
 		logger.info("saveProduct called");
-	
+		System.out.println(color);
 		Integer id = productService.saveProduct(product);
 		redirectAttributes.addFlashAttribute("message", "The product was successfully added");
-		return "redirect:/product_view/" + id;
+		return "redirect:/product_view/" + id + ".do";
 	}
 	
 	/**
@@ -78,6 +78,35 @@ public class ProductController {
 		Product product = productService.getProductById(id);
 		model.addAttribute("product", product);
 		return "ProductDetails";
+	}
+	
+	/**
+	 * 调到查询页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("product_list")
+	public String toQueryProduct(Model model){
+		List<Category> categorys = categoryService.getAllCategorys();
+		model.addAttribute("categorys", categorys);
+		return "ProductList";
+	}
+	
+	/**
+	 * 通过ajax查询产品
+	 * @param catId
+	 * @param productName
+	 * @return 以json形式返回产品列表
+	 */
+	@RequestMapping("product_query")
+	public @ResponseBody List<Product> queryProduct(Integer catId, String productName){
+		List<Product> products = null;
+		try {
+			products = productService.queryProduct(catId, productName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return products;
 	}
 
 }
