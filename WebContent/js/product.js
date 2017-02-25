@@ -43,7 +43,10 @@ function catSelect(catId, li){
  * @param li
  */
 function limouseover(li){
-	li.style.backgroundColor = "#87cefa";
+	var catIdHide = $("#cat_id").val();
+	if(catIdHide != li.value){
+		li.style.backgroundColor = "#f2f2f2";
+	}
 }
 
 /**

@@ -80,30 +80,32 @@ h4{
 #top #queryBtn{
 	width: 70px;
 	height: 40px;
-	border-radius : 5px;
+	border-radius : 20px;
 	border: 0px;
 	background-color: #ffaeb9;
+	font-size: 16px;
+	color: #fff;
+	font-weight: 600;
 	cursor: pointer;
 }
 #proList{
-	width: 650px;
+	width: 700px;
 	float: left;
 	margin-top: 50px;
-	margin-left: 80px;
+	margin-left: 60px;
 }
 #proList #proListTable{
 	width: 100%;
 }
 #proList #proListTable th{
-	line-height: 30px;
+	line-height: 25px;
 	text-align: center;
-	padding-bottom: 20px;
 	font-size: 18px;
 	font-weight: bold;
 	color: #cd5555;
 }
 #proList #proListTable td{
-	line-height: 30px;
+	line-height: 25px;
 	text-align: center;
 	font-size: 16px;
 }

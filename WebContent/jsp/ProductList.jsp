@@ -18,9 +18,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=path%>/css/main.css">
+	<link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
 	<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/product.js"></script>
 
+	
   </head>
   
   <body>
@@ -38,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	<input type="button" id="queryBtn" value="查  询" />
 	    </div>
 	    <div id="proList">
-	    	<table id="proListTable" border="0" cellpadding="0" cellspacing="0">
+	    	<table id="proListTable" class="layui-table" lay-even lay-skin="nob" border="0" cellpadding="0" cellspacing="0">
 	    		<thead>
 	    			<tr>
 		    			<th style="width: 180px;">商品名称</th>
