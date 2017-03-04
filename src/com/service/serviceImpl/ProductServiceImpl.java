@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.ProductDao;
+import com.exception.CustomException;
 import com.service.ProductService;
 
 import domain.Category;
@@ -29,8 +30,12 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public Product getProductById(Integer id) {
-		return productDao.getProductById(id);
+	public Product getProductById(Integer id) throws Exception {
+		Product product = productDao.getProductById(id);
+		if(product == null){
+			throw new CustomException("没有找到该商品信息！");
+		}
+		return product;
 	}
 
 

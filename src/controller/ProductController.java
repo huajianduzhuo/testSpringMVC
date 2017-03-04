@@ -80,9 +80,10 @@ public class ProductController {
 	 * @param id
 	 * @param model
 	 * @return
+	 * @throws Exception 从service传来的异常，抛给全局异常处理器处理
 	 */
 	@RequestMapping(value = "/product_view/{id}")
-	public String viewProduct(@PathVariable(value="id") Integer id, Model model){
+	public String viewProduct(@PathVariable(value="id") Integer id, Model model) throws Exception{
 		Product product = productService.getProductById(id);
 		model.addAttribute("product", product);
 		return "ProductDetails";

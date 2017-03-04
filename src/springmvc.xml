@@ -79,4 +79,7 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- 配置全局异常处理器 -->
+	<bean class="com.exception.CustomExceptionResolver"></bean>
 </beans>
