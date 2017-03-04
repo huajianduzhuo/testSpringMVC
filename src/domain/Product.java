@@ -26,6 +26,7 @@ public class Product implements Serializable {
 	private String description;
 	private float price;
 	private Date productionDate;
+	private String picPath;
 	private Category category;
 	private List<Category> categorys;
 	
@@ -66,6 +67,13 @@ public class Product implements Serializable {
 	}
 	public void setProductionDate(Date productionDate) {
 		this.productionDate = productionDate;
+	}
+	@Column(name="pic_path")
+	public String getPicPath() {
+		return picPath;
+	}
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
 	}
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumns({@JoinColumn(name="cat_id", referencedColumnName="id")})

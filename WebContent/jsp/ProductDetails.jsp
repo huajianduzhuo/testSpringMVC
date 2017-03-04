@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,6 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  	<div id="img">
+  	<c:if test="${product.picPath!=null }">
+  		<img alt="${product.name }" src="/file/${product.picPath }">
+  	</c:if>
+  	</div>
     <div id="global">
     	<h4>${message }</h4>
    		<fieldset>
@@ -38,7 +45,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				<label for="price">Price: </label>$${product.price }<br>
    			</p>
    			<p>
-   				<label for="productionDate">ProductionDate: </label>${product.productionDate }<br>
+   				<label for="productionDate">ProductionDate: </label>
+   				<fmt:formatDate value="${product.productionDate }" pattern="yyyy-MM-dd"/><br>
    			</p>
    		</fieldset>
     </div>

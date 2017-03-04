@@ -82,4 +82,12 @@
 	
 	<!-- 配置全局异常处理器 -->
 	<bean class="com.exception.CustomExceptionResolver"></bean>
+	
+	<!-- 文件上传下载，form标签添加属性enctype="multitype/form"时，以下必须配置，否则文件绑定出错 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的尺寸（5242880为5M） -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
 </beans>

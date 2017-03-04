@@ -1,6 +1,8 @@
 package controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.service.CategoryService;
@@ -56,10 +59,12 @@ public class ProductController {
 	 * 为了保证保存之后刷新页面时，save方法不被重复调用，数据库存值重复，返回路径使用重定向
 	 * @param productForm
 	 * @param model
+	 * @param file 上传文件
 	 * @return
 	 */
 	@RequestMapping(value = "/product_save", method = RequestMethod.POST)
-	public String saveProduct(Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public String saveProduct(Product product, BindingResult bindingResult, MultipartFile file,
+			RedirectAttributes redirectAttributes) throws Exception {
 		logger.info("saveProduct called");
 		if(bindingResult.hasErrors()){
 			FieldError fe = bindingResult.getFieldError();
@@ -67,6 +72,20 @@ public class ProductController {
 			List<Category> categorys = categoryService.getAllCategorys();
 			product.setCategorys(categorys);
 			return "ProductForm";
+		}
+		if(file != null && file.getOriginalFilename() != null && file.getOriginalFilename().length()>0){
+			//图片服务器路径
+			String file_path = "D:\\Github\\uploadFiles\\";
+			//原始文件名
+			String originalFileName = file.getOriginalFilename();
+			//新文件名，添加原始文件名后缀
+			String newFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf("."));
+			//创建新文件，路径为：图片服务器路径+新文件名
+			File newFile = new File(file_path + newFileName);
+			//将内存中的数据写入磁盘
+			file.transferTo(newFile);
+			//将新文件名写入product中
+			product.setPicPath(newFileName);
 		}
 		Integer id = productService.saveProduct(product);
 		redirectAttributes.addFlashAttribute("message", "The product was successfully added");

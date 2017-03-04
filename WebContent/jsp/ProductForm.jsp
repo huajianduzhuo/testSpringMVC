@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div id="global">
     	<%--DispatcherServlet接收所有请求，去掉.action --%>
-    	<form:form commandName="product" action="product_save.do" method="post">
+    	<form:form commandName="product" action="product_save.do" method="post" enctype="multipart/form-data">
     		<fieldset>
     			<legend>Add a product</legend>
     			<p>
@@ -54,6 +54,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				<label for="productionDate">ProductionDate: </label>
     				<form:input id="productionDate" path="productionDate" cssClass="laydate-icon" 
     					onclick="laydate({formate: 'yyyy-MM-DD', max: laydate.now()})" tabindex="4"/>
+    			</p>
+    			<p>
+    				<label for="picture">Picture:</label>
+    				<input type="file" name="file" />
     			</p>
     			<p id="buttons">
     				<input id="reset" type="reset" tabindex="5" value="reset" />
