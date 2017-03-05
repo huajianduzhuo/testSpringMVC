@@ -33,6 +33,11 @@
     	<param-value>classpath:springmvc.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
+    <!-- 用servlet3及其更高版本上传文件，给DispatcherServlet添加MultipartConfig标注 -->
+    <multipart-config>
+    	<max-file-size>20848820</max-file-size>
+    	<max-request-size>418018841</max-request-size>
+    </multipart-config>
   </servlet>
 
 	<!-- url-pattern中的*.action改为/，所有请求（包括js、css）都被映射到springmvc的DispatcherServlet，因此要在springmvc.xml中进行配置 -->

@@ -53,17 +53,18 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+	<!-- JSON配置  begin （全部注掉，因为上面配置了<mvc:annotation-driven/>，所以不需要再另外配置下面的，可以返回JSON）-->
 	<!-- 从请求和响应读取/编写字符串 -->
-	<bean id="stringHttpMessage" class="org.springframework.http.converter.StringHttpMessageConverter">
+	<!-- <bean id="stringHttpMessage" class="org.springframework.http.converter.StringHttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
 			</list>
 		</property>
-	</bean>
+	</bean> -->
 	
 	<!-- 用于将对象转化为JSON -->
-	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<!-- <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>application/json;charset=UTF-8</value>
@@ -78,16 +79,21 @@
 				<ref bean="jsonConverter"/>
 			</list>
 		</property>
-	</bean>
+	</bean> -->
+	<!-- JSON配置  end -->
 	
 	<!-- 配置全局异常处理器 -->
 	<bean class="com.exception.CustomExceptionResolver"></bean>
 	
 	<!-- 文件上传下载，form标签添加属性enctype="multitype/form"时，以下必须配置，否则文件绑定出错 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 设置上传文件的尺寸（5242880为5M） -->
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		设置上传文件的尺寸（5242880为5M）
 		<property name="maxUploadSize">
 			<value>5242880</value>
 		</property>
-	</bean>
+	</bean> -->
+	
+	 <!-- 用servlet3及其更高版本上传文件,使用一个不同的多部分解析器multipartResolver -->
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	 </bean>
 </beans>
