@@ -18,7 +18,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
 		//handler就是处理器适配器要执行handler对象（只有method方法）
-		
+		ex.printStackTrace();
 		String message = null;
 		if(ex instanceof CustomException){
 			message = ex.getMessage();

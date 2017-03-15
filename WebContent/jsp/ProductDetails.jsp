@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,13 +20,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=path %>/css/main.css">
-
+	<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=path%>/js/picture.js"></script>
   </head>
   
   <body>
   	<div id="img">
-  	<c:if test="${product.picPath!=null }">
-  		<img alt="${product.name }" src="/file/${product.picPath }">
+  	<c:if test="${product.pictures!=null && fn:length(product.pictures)>0 }" >
+  		<span style="display: none;" id="sum">${fn:length(product.pictures) }</span>
+  		<c:forEach items="${product.pictures }" var="pic" varStatus="status">
+  			<img id="img${status.index }" alt="${pic.picName }" src="/file/${pic.picPath }" 
+  				<c:if test="${status.index!=0 }">style="display: none;"</c:if> />
+  		</c:forEach>
+  		<br>
+  		<span style="text-align: left;" onclick="beforePicture()">上一张</span>
+  		<span style="text-align: right;" onclick="nextPicture()">下一张</span>
   	</c:if>
   	</div>
     <div id="global">

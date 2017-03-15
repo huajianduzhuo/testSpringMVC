@@ -6,5 +6,6 @@ import domain.Category;
 
 public interface CategoryService {
 	public List<Category> getAllCategorys();
+	public Category getCategory(Integer catId);
 
 }

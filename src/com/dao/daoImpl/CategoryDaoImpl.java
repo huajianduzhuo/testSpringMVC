@@ -25,4 +25,9 @@ public class CategoryDaoImpl implements CategoryDao {
 		return this.getCurrentSession().createQuery("from Category").list();
 	}
 
+	@Override
+	public Category getCategory(Integer catId) {
+		return (Category) this.getCurrentSession().get(Category.class, catId);
+	}
+
 }

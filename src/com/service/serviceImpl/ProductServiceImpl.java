@@ -5,17 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dao.PictureDao;
 import com.dao.ProductDao;
 import com.exception.CustomException;
 import com.service.ProductService;
 
 import domain.Category;
+import domain.Picture;
 import domain.Product;
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private PictureDao pictureDao;
 	
 	@Override
 	public Integer saveProduct(Product product) {

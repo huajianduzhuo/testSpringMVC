@@ -1,9 +1,11 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,9 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="product")
@@ -26,9 +30,9 @@ public class Product implements Serializable {
 	private String description;
 	private float price;
 	private Date productionDate;
-	private String picPath;
 	private Category category;
 	private List<Category> categorys;
+	private List<Picture> pictures = new ArrayList<Picture>();
 	
 	@GenericGenerator(name="generator", strategy="increment")
 	@Id
@@ -68,13 +72,6 @@ public class Product implements Serializable {
 	public void setProductionDate(Date productionDate) {
 		this.productionDate = productionDate;
 	}
-	@Column(name="pic_path")
-	public String getPicPath() {
-		return picPath;
-	}
-	public void setPicPath(String picPath) {
-		this.picPath = picPath;
-	}
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumns({@JoinColumn(name="cat_id", referencedColumnName="id")})
 	public Category getCategory() {
@@ -90,5 +87,14 @@ public class Product implements Serializable {
 	public void setCategorys(List<Category> categorys) {
 		this.categorys = categorys;
 	}
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="product")
+	@JsonIgnore
+	public List<Picture> getPictures() {
+		return pictures;
+	}
+	public void setPictures(List<Picture> pictures) {
+		this.pictures = pictures;
+	}
+	
 
 }

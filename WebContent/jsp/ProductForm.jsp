@@ -6,18 +6,13 @@
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE>
 <html>
   <head>
     <base href="<%=basePath%>">
     
     <title>产品输入页</title>
     
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=path%>/css/main.css">
 	<script type="text/javascript" src="<%=path%>/laydate-master-141126210932/laydate.js"></script>
 	<script type="text/javascript">
@@ -57,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</p>
     			<p>
     				<label for="picture">Picture:</label>
-    				<input type="file" name="file" />
+    				<input type="file" name="file" multiple="multiple"/>
     			</p>
     			<p id="buttons">
     				<input id="reset" type="reset" tabindex="5" value="reset" />
